@@ -7,10 +7,7 @@ package com.example.layeredarchitecture.dao;
 import com.example.layeredarchitecture.db.DBConnection;
 import com.example.layeredarchitecture.model.ItemDTO;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ItemDAOImpl {
@@ -31,5 +28,17 @@ public class ItemDAOImpl {
         }
 
         return itemDTOS;
+    }
+
+    public boolean saveItem(ItemDTO itemDTO) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
+        PreparedStatement pstm = connection.prepareStatement("INSERT INTO Item (code, description, unitPrice, qtyOnHand) VALUES (?,?,?,?)");
+        pstm.setString(1,itemDTO.getCode());
+        pstm.setString(2,itemDTO.getDescription() );
+        pstm.setBigDecimal(3,itemDTO.getUnitPrice());
+        pstm.setInt(4,itemDTO.getQtyOnHand());
+
+        boolean b = pstm.executeUpdate() > 0;
+        return b;
     }
 }
