@@ -1,6 +1,5 @@
 package com.example.layeredarchitecture.controller;
 
-import com.example.layeredarchitecture.util.SqlUtil;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
@@ -47,7 +46,6 @@ public class MainFormController {
         fadeIn.setFromValue(0.0);
         fadeIn.setToValue(1.0);
         fadeIn.play();
-
     }
 
     @FXML
